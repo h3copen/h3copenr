@@ -1,0 +1,6 @@
+[submodule "openr"]
+	path = openr
+	url = https://github.com/facebook/openr
+[submodule "h3cfibservice"]
+	path = h3cfibservice
+	url = https://github.com/h3copen/h3cfibservice

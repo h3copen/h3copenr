@@ -4,3 +4,6 @@
 [submodule "h3cfibservice"]
 	path = h3cfibservice
 	url = https://github.com/h3copen/h3cfibservice
+[submodule "comwaresdk"]
+	path = comwaresdk
+	url = https://github.com/h3copen/comwaresdk.git

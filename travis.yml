@@ -11,16 +11,18 @@ service:
   - docker 
   
 before_install:
-  - git submodule init
-  - git submodule update
-  - pwd
-  - go env
+#   - git clone --recursive https://github.com/l19328/h3copenr
+#   - git submodule init
+#   - git submodule update
   - ls
+  - pwd  
   - ls openr
-  - ls h3cfibservice && ls comwaresdk
+  - ls h3cfibservice
+  - ls comwaresdk
   - echo $GOPATH
+
+install: true
+
 #before_script:
   
-script:
-  - chmod a+x build.sh
-#   - ./build.sh
+#script:

@@ -18,7 +18,7 @@ before_install:
   - ls
   - ls openr
   - ls h3cfibservice && ls comwaresdk
-
+  - echo $GOPATH
 #before_script:
   
 script:

@@ -1,0 +1,26 @@
+dist: xenial
+
+language: go
+
+go: 
+  - 1.11.x
+
+sudo: required
+
+service:
+  - docker 
+  
+before_install:
+  - git submodule init
+  - git submodule update
+  - pwd
+  - go env
+  - ls
+  - ls openr
+  - ls h3cfibservice && ls comwaresdk
+
+#before_script:
+  
+script:
+  - chmod a+x build.sh
+#   - ./build.sh

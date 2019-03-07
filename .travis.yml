@@ -11,18 +11,21 @@ service:
   - docker 
   
 before_install:
-#   - git clone --recursive https://github.com/l19328/h3copenr
-#   - git submodule init
-#   - git submodule update
-  - ls
-  - pwd  
-  - ls openr
-  - ls h3cfibservice
-  - ls comwaresdk
-  - echo $GOPATH
 
 install: true
 
-#before_script:
+before_script:
+  - pwd
+  - chmod a+x build/build.sh
+  - ./build/build.sh
+  - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
+  - docker pull ubuntu:16.04
+  - docker images
+  - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
+  - docker ps
+  - docker cp fibhandler ubuntu:/ 
+  - docker exec ubuntu sh -c "ls -l"
+  - docker exec ubuntu sh -c "./fibhandler -h"
+
   
-#script:
+script:

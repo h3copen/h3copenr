@@ -4,7 +4,7 @@ OpenR running on H3C device
 ### 运行openr
 可直接docker pull lmke/h3c_openr:v2即可拿到openr镜像，之后按以下命令启动容器  
 docker run -it --name openr1 --network container:comware --sysctl.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-此时以启动openr容器，之后进去openr容器，在根目录下运行
+此时以启动openr容器，之后进去openr容器，在根目录下运行  
 run_openr.sh test.cfg > openr.log 2>&1 &   
 此时openr程序已经启动，log会输入到openr.log中。一部分log在/tmp目录下。
 注意：opern运行需要启动fib容器，否则openr会等待。

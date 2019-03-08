@@ -84,9 +84,9 @@ docker run -itd --name FIBTEST10 --network container:OPENRTEST10 fib:test sh
 docker run -itd --name FIBTEST11 --network container:OPENRTEST11 fib:test sh
 docker run -itd --name FIBTEST12 --network container:OPENRTEST12 fib:test sh
 
-docker exec -itd FIBTEST10 sh -c "fibhandler -framed > fib.log 2>&1 "
-docker exec -itd FIBTEST11 sh -c "fibhandler -framed > fib.log 2>&1 "
-docker exec -itd FIBTEST12 sh -c "fibhandler -framed > fib.log 2>&1 "
+docker exec -itd FIBTEST10 sh -c "fibhandler -framed -wr > fib.log 2>&1 "
+docker exec -itd FIBTEST11 sh -c "fibhandler -framed -wr > fib.log 2>&1 "
+docker exec -itd FIBTEST12 sh -c "fibhandler -framed -wr > fib.log 2>&1 "
 
 echo "now wating for openr ready "
 
@@ -96,8 +96,8 @@ do
 	docker cp OPENRTEST10:/10.routes .
         #docker exec OPENRTEST10 sh -c "breeze lm links  > 10.links"
 	#docker exec OPENRTEST10 sh -c "breeze tech-support  > 10.tech"
-	docker cp OPENRTEST10:/10.links .
-	docker cp OPENRTEST10:/10.tech .
+	#docker cp OPENRTEST10:/10.links .
+	#docker cp OPENRTEST10:/10.tech .
 	#cat 10.links
 	#cat 10.tech
 	cat 10.routes
@@ -118,7 +118,7 @@ do
 done
 
 echo "put fromat routes to /tmp/*routes"
-source func.sh
+#source func.sh
 process_routes 10.routes 
 process_routes 11.routes 
 process_routes 12.routes 

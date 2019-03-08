@@ -1,10 +1,10 @@
 # h3copenr
-OpenR running on H3C device  
+OpenR running on H3C device，包括openr和fibservice两部分，openr负责学习路由，转发到fibservice下发到H3C设备。
 
 [![Build Status](https://www.travis-ci.org/h3copen/h3copenr.svg?branch=master)](https://www.travis-ci.org/h3copen/h3copenr) 
 
 ## openr设备上运行
-### 运行openr
+### openr运行
 可直接docker pull lmke/h3c_openr:v2即可拿到openr镜像，之后按以下命令启动容器  
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 此时以启动openr容器，之后进去openr容器，在根目录下运行  

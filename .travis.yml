@@ -32,4 +32,3 @@ before_script:
   
 script:
   - ./build/test.sh
-  - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler

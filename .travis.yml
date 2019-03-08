@@ -25,7 +25,7 @@ before_script:
   - docker ps
   - docker cp fibhandler ubuntu:/ 
   - docker exec ubuntu sh -c "ls -l"
-  - docker exec ubuntu sh -c "./fibhandler"
+  - docker exec -d ubuntu sh -c "./fibhandler"
 
   
 script:

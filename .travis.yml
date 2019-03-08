@@ -29,9 +29,7 @@ before_script:
   - popd
   - docker pull lmke/h3c_openr:v2
   - chmod +x build/test.sh
-  - ./build/test.sh
-  
-
   
 script:
+  - ./build/test.sh
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler

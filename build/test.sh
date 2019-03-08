@@ -54,9 +54,9 @@ function cmp_routes()
 
 
 
-docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 --privileged openr:test bash
-docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 --privileged openr:test bash
-docker run -itd --name OPENRTEST12 --sysctl net.ipv6.conf.all.disable_ipv6=0 --privileged openr:test bash
+docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
+docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
+docker run -itd --name OPENRTEST12 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
 
 docker network create --subnet 12.13.14.0/24  --gateway=12.13.14.1 Net1
 docker network create --subnet 12.13.15.0/24  --gateway=12.13.15.1 Net2

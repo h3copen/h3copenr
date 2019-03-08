@@ -7,4 +7,3 @@ ln -s /home/travis/gopath/src/github.com/h3copen/h3copenr/h3cfibservice /home/tr
 cd /home/travis/gopath/src/github.com/h3copen
 cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
 go build
-ls

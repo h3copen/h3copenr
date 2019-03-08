@@ -8,22 +8,17 @@ go:
 sudo: required
 
 service:
-  - docker 
+  - docker  
   
-before_install:
-
 install: true
 
 before_script:
-  - pwd
   - chmod a+x build/build.sh
   - ./build/build.sh
   - pushd .
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
   - docker pull ubuntu:16.04
-  - docker images
   - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
-  - docker ps
   - docker cp fibhandler ubuntu:/bin
   - docker commit ubuntu fib:test
   - popd

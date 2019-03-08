@@ -28,6 +28,7 @@ before_script:
   - docker commit ubuntu fib:test
   - popd
   - docker pull lmke/h3c_openr:v2
+  - chmod +x build/test.sh
   - ./build/test.sh
   
 

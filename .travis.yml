@@ -18,14 +18,18 @@ before_script:
   - pwd
   - chmod a+x build/build.sh
   - ./build/build.sh
+  - push .
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
   - docker pull ubuntu:16.04
   - docker images
   - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
   - docker ps
   - docker cp fibhandler ubuntu:/ 
-  - docker exec ubuntu sh -c "ls -l"
-  - docker exec -d ubuntu sh -c "./fibhandler"
+  - docker commit ubuntu fib:test
+  - popd
+  - docker pull lmke/h3c_openr:v2
+  - ./build/test.sh
+  
 
   
 script:

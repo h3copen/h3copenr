@@ -141,7 +141,7 @@ docker stop OPENRTEST10
 
 while :
 do 
-	docker exec OPENRTEST11 sh -c "breeze fib routes > 10.routes.del"
+	docker exec OPENRTEST11 sh -c "breeze fib routes > 11.routes.del"
 	docker cp OPENRTEST11:/11.routes.del .
 	temp=`cmp 11.routes.del 11.routes`
 	if [ "$temp" = "" ]

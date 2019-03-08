@@ -94,7 +94,11 @@ while :
 do 
 	docker exec OPENRTEST10 sh -c "breeze fib routes > 10.routes"
 	docker cp OPENRTEST10:/10.routes .
-        cat 10.routes
+        docker exec OPENRTEST10 sh -c "breeze lm links  > 10.links"
+	docker cp OPENRTEST10:/10.links .
+	cat 10.links
+	#cat 10.routes
+	
 	grep "No routes found" 10.routes > /dev/null
 	if [ $? -eq 0 ]
 	then 

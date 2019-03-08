@@ -27,4 +27,8 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 ### CI 编译
 在顶层目录中，我们包含了一个build.sh,在这个脚本中，我们会拉取镜像，创建容器，在其中下载最新代码。编译openr，此外我们还会编译fib，编译成功后，我们会拉取新镜像运行openr和fib,fib是用来接受openr发出的路由.之后会运行测试脚本，比较openr中的路由和fib中的路由是否相同
 
-## fibservice
+## fibservice 
+### build
+fibservice将openr路由转发到H3C，cd /fibservice/fibhandler 执行go build编译生成fibhanlder，执行./fibhandler -h可以查看参数含义。
+### run
+fibhandler 运行在另一个容器ubuntu16.04中，

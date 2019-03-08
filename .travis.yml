@@ -22,8 +22,8 @@ before_script:
   - docker cp fibhandler ubuntu:/bin
   - docker commit ubuntu fib:test
   - popd
-  - docker pull lmke/h3c_openr:v4
-  - docker run -itd --name complie_openr lmke/h3c_openr:v4  bash
+  - docker pull lmke/h3c_openr:v5
+  - docker run -itd --name complie_openr lmke/h3c_openr:v5  bash
   - docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git && cd /openr/build \
                                           && sed -i \"s/sudo//g \"  build_openr.sh  && ./build_openr.sh"
 

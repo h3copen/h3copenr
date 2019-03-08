@@ -24,7 +24,7 @@ before_script:
   - docker images
   - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
   - docker ps
-  - docker cp fibhandler ubuntu:/ 
+  - docker cp fibhandler ubuntu:/bin
   - docker commit ubuntu fib:test
   - popd
   - docker pull lmke/h3c_openr:v2

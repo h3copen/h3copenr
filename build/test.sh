@@ -137,13 +137,13 @@ then
 fi
 
 echo "now we test del routes,stop one openr"
-docker stop OPENRTEST11
+docker stop OPENRTEST10
 
 while :
 do 
-	docker exec OPENRTEST10 sh -c "breeze fib routes > 10.routes.del"
-	docker cp OPENRTEST10:/10.routes.del .
-	temp=`cmp 10.routes.del 10.routes`
+	docker exec OPENRTEST11 sh -c "breeze fib routes > 10.routes.del"
+	docker cp OPENRTEST11:/11.routes.del .
+	temp=`cmp 11.routes.del 11.routes`
 	if [ "$temp" = "" ]
 	then
 		echo "openr not ready"
@@ -152,20 +152,20 @@ do
 		echo "openr ready"	
 		docker exec OPENRTEST12 sh -c "breeze fib routes > 12.routes"
 		docker cp OPENRTEST12:/12.routes .
-		rm 10.routes
-		mv 10.routes.del 10.routes
+		rm 11.routes
+		mv 11.routes.del 11.routes
 		break
 	fi 
 done
 
-process_routes 10.routes 
+process_routes 11.routes 
 process_routes 12.routes 
 
 echo "waiting fib routes"
 sleep 3
-docker cp FIBTEST10:/routes.txt /tmp/10.routes.fib
+docker cp FIBTEST11:/routes.txt /tmp/11.routes.fib
 docker cp FIBTEST12:/routes.txt /tmp/12.routes.fib
-cmp_routes 10 12
+cmp_routes 11 12
 
 if [ $? -ne 0 ]
 then

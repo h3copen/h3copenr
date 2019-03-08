@@ -72,6 +72,9 @@ docker network connect Net4 --ip 12.13.17.4 OPENRTEST12
 docker network disconnect bridge OPENRTEST10
 docker network disconnect bridge OPENRTEST11
 docker network disconnect bridge OPENRTEST12
+docker cp  test.cfg OPENRTEST10:/
+docker cp  test.cfg OPEMRTEST11:/
+docker cp  test.cfg OPEMRTEST12:/
 
 docker exec -itd OPENRTEST10 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "
 docker exec -itd OPENRTEST11 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "

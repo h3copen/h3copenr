@@ -53,7 +53,7 @@ function cmp_routes()
 }
 
 
-
+set -x
 docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
 docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
 docker run -itd --name OPENRTEST12 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
@@ -73,8 +73,8 @@ docker network disconnect bridge OPENRTEST10
 docker network disconnect bridge OPENRTEST11
 docker network disconnect bridge OPENRTEST12
 docker cp  test.cfg OPENRTEST10:/
-docker cp  test.cfg OPEMRTEST11:/
-docker cp  test.cfg OPEMRTEST12:/
+docker cp  test.cfg OPENRTEST11:/
+docker cp  test.cfg OPENRTEST12:/
 
 docker exec -itd OPENRTEST10 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "
 docker exec -itd OPENRTEST11 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "

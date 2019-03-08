@@ -24,7 +24,7 @@ before_script:
   - popd
   - docker pull lmke/h3c_openr:v2
   - docker run -itd --name complie_openr lmke/h3c_openr:v2  bash
-  - docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git && cd /home/openr/build \
+  - docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git && cd /openr/build \
                                           && sed -i \"s/sudo//g \"  build_openr.sh  && ./build_openr.sh"
 
   - chmod +x build/test.sh

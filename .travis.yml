@@ -18,7 +18,7 @@ before_script:
   - pwd
   - chmod a+x build/build.sh
   - ./build/build.sh
-  - push .
+  - pushd .
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
   - docker pull ubuntu:16.04
   - docker images

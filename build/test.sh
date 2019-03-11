@@ -54,9 +54,9 @@ function cmp_routes()
 
 
 #set -x
-docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
-docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
-docker run -itd --name OPENRTEST12 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
+docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 openr:test bash
+docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 openr:test bash
+docker run -itd --name OPENRTEST12 --sysctl net.ipv6.conf.all.disable_ipv6=0 openr:test bash
 
 docker network create --subnet 12.13.14.0/24  --gateway=12.13.14.1 Net1
 docker network create --subnet 12.13.15.0/24  --gateway=12.13.15.1 Net2
@@ -80,9 +80,9 @@ docker exec -itd OPENRTEST10 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "
 docker exec -itd OPENRTEST11 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "
 docker exec -itd OPENRTEST12 sh -c "run_openr.sh test.cfg > openr.log 2>&1 "
 
-docker run -itd --name FIBTEST10 --network container:OPENRTEST10 fib:test sh
-docker run -itd --name FIBTEST11 --network container:OPENRTEST11 fib:test sh
-docker run -itd --name FIBTEST12 --network container:OPENRTEST12 fib:test sh
+docker run -itd --name FIBTEST10 --network container:OPENRTEST10 fib:test bash
+docker run -itd --name FIBTEST11 --network container:OPENRTEST11 fib:test bash
+docker run -itd --name FIBTEST12 --network container:OPENRTEST12 fib:test bash
 
 docker exec -itd FIBTEST10 sh -c "fibhandler -framed -wr > fib.log 2>&1 "
 docker exec -itd FIBTEST11 sh -c "fibhandler -framed -wr > fib.log 2>&1 "

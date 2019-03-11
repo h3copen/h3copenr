@@ -27,7 +27,7 @@ before_script:
                                           && sed -i \"s/sudo//g \"  build_openr.sh  && ./build_openr.sh"
   - if [ $? -eq 0 ]
   -  then
-  -   git log | head -1 >> commit.id.log
+  -   docker exec complie_openr sh -c "cd /openr && git log | head -1"  >> commit.id.log
   -   docker cp /usr/local/sbin/openr .
   -   docker build -f dockerfile_openr -t openr:test .
   - else

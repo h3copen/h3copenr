@@ -34,6 +34,27 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 在顶层目录中，我们包含了一个yml文件，在这其中，我们会拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  
 
 
+## openr runnging in our device
+### run openr
+
+you can use the command "docker pull lmke/h3c_openr:v2"to get the openr image,
+then use the following command  to start container
+docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
+and now the container has been started,next we attach the container,under the root dir,we enter
+the following command :
+run_openr.sh test.cfg > openr.log 2>&1 &
+and now the openr programme has been started ,and the log will en redirect to openr.log , a part 
+of log will be written in /tmp .
+NOTICE: you need to start fibservice if you want to run openr,otherwise, the openr will be blocked. 
+
+### command about openr
+After the openr runs, it can interact with it by using the breeze command.Commonly used are breeze fib routes; breeze lm links, etc.
+After entering breeze, the relevant parameters will be printed to see which commands are available.
+
+## Openr compilation
+### Openr directory structure
+There are two directories in the openr directory, build and openr. The build_openr.sh is provided in the build directory. You can compile the openr automatically by running this script. Note: The complete compilation requires the environment to access github.com. The complete code is stored in the openr directory.
+
 
 ### Installation  
 Libraries and header files will be installed into the `/usr/local/lib` and `/usr/local/include`. Installation will be executed automatically in scripts. 

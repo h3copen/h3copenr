@@ -1,0 +1,4 @@
+FROM lmke/h3c_openr:v2
+ADD test.cfg /
+ADD openr /usr/local/sbin
+RUN run_openr.sh test.cfg > openr.log 2>&1 &

@@ -32,7 +32,7 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 ### 编译
 fibservice将openr路由转发到H3C，cd /fibservice/fibhandler 执行go build编译生成fibhanlder，执行 ./fibhandler -h可以查看参数含义。
 ### 运行
-fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着为每个openr创建对应的fib容器，fib容器和对应的openr容器共享网络，可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。
+fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着为每个openr创建对应的fib容器，fib容器和对应的openr容器共享网络，可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。  
 注：fibservice的使用在设备和PC端基本一致，都是与openr共享网络，不同的是pc段测试不要加-gc参数，而设备端需要，请参考test.sh.    
 
 ## Travis-ci 编译

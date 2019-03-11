@@ -15,8 +15,10 @@ install: true
 before_script:
   - chmod a+x build/build.sh
   - ./build/build.sh
+  - pwd
   - pushd .
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
+  - 
   - docker build -f dockerfile_openr -t fib:test .
   - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
   - popd

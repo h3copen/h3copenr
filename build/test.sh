@@ -53,6 +53,19 @@ function cmp_routes()
 }
 
 
+docker pull lmke/h3c_openr:v5
+docker run -itd --name complie_openr lmke/h3c_openr:v5  bash
+docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git"
+if [ $? -eq 0 ]; then 
+	docker exec complie_openr sh -c "cd /openr && git log | head -1"  >> commit.id.log 
+	docker cp complie_openr:/usr/local/sbin/openr . 
+	docker build -f dockerfile_openr -t openr:test .
+else 
+	echo "complie openr error"
+	exit 1 
+fi
+
+
 #set -x
 docker run -itd --name OPENRTEST10 --sysctl net.ipv6.conf.all.disable_ipv6=0 openr:test bash
 docker run -itd --name OPENRTEST11 --sysctl net.ipv6.conf.all.disable_ipv6=0 openr:test bash

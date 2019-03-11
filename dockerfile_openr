@@ -1,0 +1,3 @@
+FROM lmke/h3c_openr:v2
+ADD test.cfg /
+ADD openr /usr/local/sbin

@@ -1,5 +1,5 @@
 # h3copenr
-OpenR running on H3C device，包括openr和fibservice两部分，openr负责学习路由，fibservice负责下发路由到H3C设备。
+OpenR running on H3C device，包括openr和fibservice两部分，openr学习路由发送到fibservice，fibservice下发路由到H3C设备。
 
 [![Build Status](https://www.travis-ci.org/h3copen/h3copenr.svg?branch=master)](https://www.travis-ci.org/h3copen/h3copenr) 
 

@@ -35,10 +35,10 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 
 
 
-### Install 
+### Installation  
 Libraries and header files will be installed into the `/usr/local/lib` and `/usr/local/include`. Installation will be executed automatically in scripts. 
 
-## fibservice
+## Fibservice
 ### Build
 Fibservice forwards openr routes to H3C device. Get into directory `/fibservice/fibhandler`. The command `go build` Compile and generate the `fibhandler`. Usage of  `./fibhandler -h ` to view the meaning of parameters.
 ### Run

@@ -52,7 +52,7 @@ function cmp_routes()
 	done
 }
 
-#set -e
+set -e
 docker pull lmke/h3c_openr:v5
 docker run -itd --name complie_openr lmke/h3c_openr:v5  bash
 docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git && cd /openr/build "

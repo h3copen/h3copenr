@@ -64,6 +64,7 @@ if [ $? -eq 0 ]; then
 	#echo `pwd`/commit.id.log
 	echo $s >> `pwd`/commit.id.log
 	echo $s >> commit.id.log 
+	echo "abc " >> commit.id.log
 	#docker cp complie_openr:/usr/local/sbin/openr . 
 	#touch openr
 	docker build -f dockerfile_openr -t openr:test .

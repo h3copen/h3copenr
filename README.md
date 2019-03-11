@@ -7,8 +7,12 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 ### openr运行
 可直接docker pull lmke/h3c_openr:v2即可拿到openr镜像，之后按以下命令启动容器  
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+注：此条命令适用于设备上启动openr,如果在PC中测试，需要参照/build/test.sh
+
 此时以启动openr容器，之后进去openr容器，在根目录下运行  
 run_openr.sh test.cfg > openr.log 2>&1 &   
+注：test.cfg在设备和PC端测试时对应内容不同，镜像中的test.cfg适用于设备环境，PC端测试环境需使用本仓库的test.cfg  
+
 此时openr程序已经启动，log会输入到openr.log中。一部分log在/tmp目录下。
 注意：opern运行需要启动fib容器，否则openr会等待。
 
@@ -29,6 +33,7 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 fibservice将openr路由转发到H3C，cd /fibservice/fibhandler 执行go build编译生成fibhanlder，执行 ./fibhandler -h可以查看参数含义。
 ### 运行
 fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着为每个openr创建对应的fib容器，fib容器和对应的openr容器共享网络，可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。
+注：fibservice的使用在设备和PC端基本一致，都是与openr共享网络，不同的是pc段测试不要加-gc参数，而设备端需要，请参考test.sh.    
 
 ## Travis-ci 编译
 在顶层目录中，我们包含了一个yml文件，在这其中，我们会拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  

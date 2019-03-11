@@ -38,11 +38,11 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 ### run openr
 
 you can use the command "docker pull lmke/h3c_openr:v2"to get the openr image,
-then use the following command  to start container
-docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash
+then use the following command  to start container  
+docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 and now the container has been started,next we attach the container,under the root dir,we enter
 the following command :
-run_openr.sh test.cfg > openr.log 2>&1 &
+run_openr.sh test.cfg > openr.log 2>&1 &  
 and now the openr programme has been started ,and the log will en redirect to openr.log , a part 
 of log will be written in /tmp .
 NOTICE: you need to start fibservice if you want to run openr,otherwise, the openr will be blocked. 

@@ -17,9 +17,8 @@ before_script:
   - ./build/build.sh
   - pushd .
   - cd /home/travis/gopath/src/github.com/h3copen/h3cfibservice/fibhandler
-  - docker pull ubuntu:16.04
+  - docker build -f dockerfile_fib
   - docker run -itd --name ubuntu ubuntu:16.04 /bin/bash 
-  - docker cp fibhandler ubuntu:/bin
   - docker commit ubuntu fib:test
   - popd
   - docker pull lmke/h3c_openr:v5

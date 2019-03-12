@@ -52,25 +52,28 @@ function cmp_routes()
 	done
 }
 
-set -e
-docker pull lmke/h3c_openr:v5
-docker run -itd --name complie_openr lmke/h3c_openr:v5  bash
-docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git && cd /openr/build "
+
+docker pull lmke/h3c_openr:complie
+docker run -itd --name complie_openr lmke/h3c_openr:complie  bash
+docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git"
+docker cp ./build/build_openr.sh complie_openr:/openr/build/build_openr_fast.sh
+docker exec -it complie_openr sh -c "cd /openr/build && chmod +x build_openr_fast.sh && ./build_openr_fast.sh"
 if [ $? -eq 0 ]; then 
-	s=`docker exec -t complie_openr sh -c "cd /openr && git log | head -1" `
-	#echo $s
-	#file commit.id.log
-	#echo `pwd`
-	#echo `pwd`/commit.id.log
-	echo $s >> `pwd`/commit.id.log
-	echo $s >> commit.id.log 
-	echo "abc " >> commit.id.log
-	#docker cp complie_openr:/usr/local/sbin/openr . 
-	#touch openr
+	docker exec -t complie_openr sh -c "cd /openr && git log | head -1" 
+	docker cp complie_openr:/usr/local/sbin/openr .
 	docker build -f dockerfile_openr -t openr:test .
 else 
-	echo "complie openr error"
-	exit 1 
+	echo "fast complie openr error"
+	docker exec -it complie_openr sh -c "cd /openr/build && ./build_openr.sh"
+	
+	if [ $? -eq 0 ]; then 
+		docker exec -t complie_openr sh -c "cd /openr && git log | head -1"
+		docker cp complie_openr:/usr/local/sbin/openr .
+		docker build -f dockerfile_openr -t openr:test .
+	else
+		echo "complie openr error"
+		exit 1
+	fi
 fi
 
 

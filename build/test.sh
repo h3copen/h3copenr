@@ -65,7 +65,7 @@ if [ $? -eq 0 ]; then
 	docker build -f dockerfile_openr -t openr:test .
 else 
 	echo "fast complie openr error"
-	docker exec -it complie_openr sh -c "cd /openr/build && sed -i \"s/sudo//g\" build_openr_fast.sh && ./build_openr.sh"
+	docker exec -it complie_openr sh -c "cd /openr/build && sed -i \"s/sudo//g\" build_openr.sh && ./build_openr.sh"
 	
 	if [ $? -eq 0 ]; then 
 		docker exec -t complie_openr sh -c "cd /openr && git log | head -1"

@@ -31,5 +31,5 @@ notifications:
     recipients:
       - li.mengjie@h3c.com
       - lin.changsheng@h3c.com
-    on_success: always # default: change
-    on_failure: always # default: always
+    on_success: change # default: change
+    on_failure: never # default: always

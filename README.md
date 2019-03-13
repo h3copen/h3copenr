@@ -51,7 +51,8 @@ docker run -it --name fib1 --network container:openr1 ubuntu:16.04 bash
 chmod +x fibhandler  
 docke cp fibhanler fib1:/bin  
 4）：为每个openr创建对应fib容器    
-有几个openr容器，就需要几个fib容器，每个openr和fib容器对应，对应关系体现在 第2步运行命令中， --network container:openr_name,这里填写的是对应的openr名称。命令相同，只需修改fib名称和对应的openr容器名称。创建多个fib容器，即重复2 、3步。  
+有几个openr容器，就需要几个fib容器，每个openr和fib容器对应，对应关系体现在 第2步运行命令中  
+--network container:openr_name,这里填写的是对应的openr名称。命令相同，只需修改fib名称和对应的openr容器名称。创建多个fib容器，即重复2 、3步。  
 5）：运行  
 docker attach fib1  
 进入每个fib容器，之后运行    

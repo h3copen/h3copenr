@@ -56,12 +56,12 @@ docke cp fibhanler fib1:/bin
 --network container:openr_name,这里填写的是对应的openr名称。命令相同，只需修改fib名称和对应的openr容器名称。创建多个fib容器，即重复2 、3步。  
 5）：运行  
 docker attach fib1  
-进入每个fib容器，运行fib需要带参数，可查看说明[`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md)，pc端执行    
+进入每个fib容器，所有fib容器都要运行其fibhandler，据实际情况需配置不同ip和用户名、密码，可查看说明[`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md)，如pc端需要以下参数：   
 ./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -wr    
-设备端执行   
+设备端：   
 ./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -ec  
 PC端和设备端运行时都需要加上framed（默认已加framed）参数    
-注：所有fib容器都要运行其fibhandler.    
+注：ac（设备ip），uc（用户名），pwc（密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
 
 
 ### openr相关命令

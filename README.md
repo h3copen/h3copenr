@@ -5,16 +5,41 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 
 ## openr在设备上运行
 ### openr运行
-可直接docker pull lmke/h3c_openr:v2即可拿到openr镜像，之后按以下命令启动容器  
+1：可直接 docker pull lmke/h3c_openr:v2 即可拿到openr镜像
+
+2：之后按以下命令启动容器
+设备端：
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 注：此条命令适用于设备上启动openr,如果在PC中测试，需要参照/build/test.sh,其中关于IP地址的设定和网关设定可忽略。 
+pc端：
+docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+注：不管设备还是PC端，我们都需要至少2个openr。
 
-此时以启动openr容器，之后进去openr容器，在根目录下运行  
+3:openr 的网络设置
+设备端：
+在设备端中我们在启动命令中已经设计了相应网络 --network conatine:comware
+除此之外，我们至少需要两台设备，并保证两台设备间有一个物理连接，可直接ping通。在两台设备上分别运行设备端启动openr容器命令.
+pc端：
+我们需创建docker 网络
+docker create net1
+docker create net2
+docker create net3
+至少需要3个net,2个openr
+docker network connect net1 openr1
+docker network connect net2 openr1
+docker network connect net2 openr2
+docker network connect net3 openr2
+
+4:openr 运行
+此时以启动openr容器，之后进去openr容器，在每个openr的根目录下运行  
 run_openr.sh test.cfg > openr.log 2>&1 &   
 注：test.cfg在设备和PC端测试时对应内容不同，镜像中的test.cfg适用于设备环境，PC端测试环境需使用本仓库的test.cfg  
 
 此时openr程序已经启动，log会输入到openr.log中。一部分log在/tmp目录下。
-注意：opern运行需要启动fib容器，否则openr会等待。
+注意：opern运行后需要启动fib容器openr才能正常运行。
+
+5：fib容器运行
+
 
 ### openr相关命令
 openr运行后可使用breeze 命令与其进行交互

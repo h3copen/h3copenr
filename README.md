@@ -61,7 +61,7 @@ docker attach fib1
 设备端：   
 ./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -ec  
 PC端和设备端运行时都需要加上framed（默认已加framed）参数    
-注：ac（设备ip），uc（用户名），pwc（密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
+注：ac（设备ip），uc（设备用户名），pwc（设备密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
 
 
 ### openr相关命令

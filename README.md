@@ -40,7 +40,7 @@ run_openr.sh test.cfg > openr.log 2>&1 &
 注意：opern运行后需要启动fib容器openr才能正常运行。
 
 5：fib容器运行  
-注：一般来说fib，fibhandler,fibservice，在上下文没有特殊说明时，都是指代同一事物。  
+注：本文中的fib，fibhandler，fibservice，在上下文没有特殊说明时，都是指代同一事物。  
 1）：创建fib容器    
 本仓库h3cfibservice和comwaresdk目录中包含fib的源码，需要手动编译，生成fib程序。    
 之后需要拉取镜像，以ubuntu16.04为例    

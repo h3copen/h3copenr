@@ -7,18 +7,18 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 ### openr运行
 1：可直接 docker pull lmke/h3c_openr:v2 即可拿到openr镜像
 
-2：之后按以下命令启动容器
+2：之后按以下命令启动容器  
 设备端：  
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-注：此条命令适用于设备上启动openr,如果在PC中测试，需要参照/build/test.sh,其中关于IP地址的设定和网关设定可忽略。 
+注：此条命令适用于设备上启动openr,如果在PC中测试，需要参照/build/test.sh,其中关于IP地址的设定和网关设定可忽略。   
 pc端：  
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 注：不管设备还是PC端，我们都需要至少2个openr。
 
-3:openr 的网络设置
+3:openr 的网络设置  
 设备端：  
 在设备端中我们在启动命令中已经设计了相应网络 --network conatine:comware  
-除此之外，我们至少需要两台设备，并保证两台设备间有一个物理连接，可直接ping通。在两台设备上分别运行设备端启动openr容器命令.  
+除此之外，我们至少需要两台设备，并保证两台设备间有一个物理连接，可直接ping通。在两台设备上分别运行设备端启动openr容器命令.    
 pc端：
 我们需创建docker 网络  
 docker create net1  

@@ -56,7 +56,7 @@ docke cp fibhanler fib1:/bin
 5）：运行  
 docker attach fib1  
 进入每个fib容器，之后运行    
-fibhandler -h    
+fibhandler -h [`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md) 
 可查看说明，PC端和设备端运行时都需要加上framed参数    
 注：所有fib容器都要运行其fibhandler.    
 

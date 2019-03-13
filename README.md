@@ -4,7 +4,8 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 [![Build Status](https://www.travis-ci.org/h3copen/h3copenr.svg?branch=master)](https://www.travis-ci.org/h3copen/h3copenr) 
 
 
-### openr运行
+### openr运行  
+可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。  
 1：docker pull lmke/h3c_openr:v2 拿到openr镜像
 
 2：按以下命令启动容器  
@@ -77,7 +78,7 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 ### 编译
 fibservice将openr路由转发到H3C，cd /fibservice/fibhandler 执行go build编译生成fibhanlder，执行 ./fibhandler -h可以查看参数含义。
 ### 运行
-fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着为每个openr创建对应的fib容器，fib容器和对应的openr容器共享网络，可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。  
+fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着为每个openr创建对应的fib容器，fib容器和对应的openr容器共享网络。
 注：fibservice的使用在设备和PC端基本一致，都是与openr共享网络，不同的是pc段测试不要加-gc参数，而设备端需要，请参考test.sh.    
 
 ## Travis-ci 编译
@@ -86,64 +87,16 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 
 ## openr runnging in our device
 ### run openr
-1：you can use the following command to get the openr image, 
-docker pull lmke/h3c_openr:v2 
-    
-2: Then start the container by the following command
-Device side:
+
+you can use the command "docker pull lmke/h3c_openr:v2"to get the openr image,
+then use the following command  to start container  
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-
-pc side:  
-docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-Note: We need at least 2 openrs regardless of the device or PC. So on the PC side, you need to create one or more openrs, as long as the container name is different. Each device on the device only runs one openr, so at least two devices are required. We only need one PC.
-
-
-3: openr's network settings   
-Device side:
-In the device side, we have designed the corresponding network in the startup command.  
---network conatine:comware  
-In addition, we need at least two devices and ensure that there is a physical connection between the two devices, which can be directly pinged. Run the device-side openopen container command on both devices.  
-
-pc side：  
-We need to create a docker network  
-docker create net1    
-docker create net2  
-docker create net3   
-Need at least 3 nets, 2 openr  
-docker network connect net1 openr1  
-docker network connect net2 openr1  
-docker network connect net2 openr2  
-docker network connect net3 openr2  
-
-4: run openr  
-At this point, the openr container has been started, and then the openr container (docker attach openr1) is run, running in the root directory of each openr.    
-run_openr.sh test.cfg > openr.log 2>&1 &    
-Note: test.cfg is different in the test of the device and the PC. The test.cfg in the image is applicable to the device environment. The PC test environment needs to use the test.cfg of the repository. The commands corresponding to the device and PC are the same.    
-At this point the openr program has been started and the log is entered into openr.log. Part of the log is in the /tmp directory.  
-Note: After running opn, you need to start the fib container openr to run normally.  
-
-5: run fib container   
-Note: Generally speaking, we will say fib, fibhandler, fibservice, and refer to the same thing when there is no special description in the context.  
-1): Create a fib container  
-The h3cfibservice and comwaresdk directories in this repository contain the source code of fib, which needs to be compiled manually to generate the fib program.  
-After that, we need to pull the image. Let's take ubuntu16.04 as an example.  
-docker pull ubuntu:16.04   
-2): run  
-docker run -it --name fib1 --network container:openr1 ubuntu:16.04 bash    
-3): copy fib to container  
-chmod +x fibhandler    
-docke cp fibhanler fib1:/bin  
-4): Create a corresponding fib container for each openr  
-There are several openr containers, you need several fib containers, each openr and fib container correspond, the corresponding relationship is reflected in the second step run command   
---network container:openr_name,Filled in here is the corresponding openr name. The command is the same, just modify the fib name and the corresponding openr container name. Create multiple fib containers, that is, repeat steps 2 and 3.  
-5): Run  
-docker attach fib1   
-Enter each fib container and run  
-fibhandler -h    
-You can check the description. Both the PC and the device must be loaded with the framed parameter.  
-Note: All fib containers must run their fibhandler.  
-
-
+and now the container has been started,next we attach the container,under the root dir,we enter
+the following command :
+run_openr.sh test.cfg > openr.log 2>&1 &  
+and now the openr programme has been started ,and the log will en redirect to openr.log , a part 
+of log will be written in /tmp .
+NOTICE: you need to start fibservice if you want to run openr,otherwise, the openr will be blocked. 
 
 ### command about openr
 After the openr runs, it can interact with it by using the breeze command.Commonly used are breeze fib routes; breeze lm links, etc.

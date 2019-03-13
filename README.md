@@ -9,9 +9,9 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 
 2：按以下命令启动容器  
 设备端：  
-docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash    
+docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 
-pc端：    
+pc端：   
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 注：不管设备还是PC端，都需要至少2个openr。在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，而PC只需要一台。    
 
@@ -93,17 +93,15 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 docker pull lmke/h3c_openr:v2 
     
 2: Then start the container by the following command
-Device side:
-docker run -it --name openr1 
-
---network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+Device side:  
+docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 PC side:  
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 Note: We need at least 2 openrs regardless of the device or PC. So on the PC side, you need to create one or more openrs, as long as the container name is different. Each device on the device only runs one openr, so at least two devices are required. We only need one PC.  
+
 3: openr's network settings   
 Device side:  
-In the device side, we have designed the corresponding network in the startup command.  
---network conatine:comware  
+In the device side, we have designed the corresponding network in the startup command. --network conatine:comware    
 In addition, we need at least two devices and ensure that there is a physical connection between the two devices, which can be directly pinged. Run the device-side openopen container command on both devices.  
 PC side：  
 We need to create a docker network  

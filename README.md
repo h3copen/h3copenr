@@ -17,18 +17,18 @@ docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_
 
 3:openr 的网络设置
 设备端：
-在设备端中我们在启动命令中已经设计了相应网络 --network conatine:comware
+在设备端中我们在启动命令中已经设计了相应网络 --network conatine:comware  
 除此之外，我们至少需要两台设备，并保证两台设备间有一个物理连接，可直接ping通。在两台设备上分别运行设备端启动openr容器命令.
 pc端：
-我们需创建docker 网络
-docker create net1
-docker create net2
-docker create net3
-至少需要3个net,2个openr
-docker network connect net1 openr1
-docker network connect net2 openr1
-docker network connect net2 openr2
-docker network connect net3 openr2
+我们需创建docker 网络  
+docker create net1  
+docker create net2  
+docker create net3  
+至少需要3个net,2个openr  
+docker network connect net1 openr1  
+docker network connect net2 openr1  
+docker network connect net2 openr2  
+docker network connect net3 openr2  
 
 4:openr 运行
 此时以启动openr容器，之后进去openr容器，在每个openr的根目录下运行  

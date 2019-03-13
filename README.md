@@ -5,15 +5,15 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 
 
 ### openr运行
-1：可直接 docker pull lmke/h3c_openr:v2 即可拿到openr镜像
+1：docker pull lmke/h3c_openr:v2 拿到openr镜像
 
-2：之后按以下命令启动容器  
+2：按以下命令启动容器  
 设备端：  
 docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 
 pc端：  
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-注：不管设备还是PC端，我们都需要至少2个openr。所以在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，我们只需要一台PC。  
+注：不管设备还是PC端，都需要至少2个openr。在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，而PC只需要一台。  
 
 3：openr 的网络设置  
 设备端：  
@@ -21,7 +21,7 @@ docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_
 除此之外，我们至少需要两台设备，并保证两台设备间有一个物理连接，可直接ping通。在两台设备上分别运行设备端启动openr容器命令.   
 
 pc端：
-我们需创建docker 网络  
+需创建docker 网络  
 docker create net1  
 docker create net2  
 docker create net3  
@@ -40,10 +40,10 @@ run_openr.sh test.cfg > openr.log 2>&1 &
 注意：opern运行后需要启动fib容器openr才能正常运行。
 
 5：fib容器运行  
-注：一般我们会说fib，fibhandler,fibservice，在上下文没有特殊说明时，都是指代同一事物。  
+注：一般来说fib，fibhandler,fibservice，在上下文没有特殊说明时，都是指代同一事物。  
 1）：创建fib容器    
 本仓库h3cfibservice和comwaresdk目录中包含fib的源码，需要手动编译，生成fib程序。    
-之后需要拉取镜像，我们以ubuntu16.04为例    
+之后需要拉取镜像，以ubuntu16.04为例    
 docker pull ubuntu:16.04  
 2）：运行  
 docker run -it --name fib1 --network container:openr1 ubuntu:16.04 bash   
@@ -56,8 +56,8 @@ docke cp fibhanler fib1:/bin
 5）：运行  
 docker attach fib1  
 进入每个fib容器，之后运行    
-fibhandler -h [`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md) 
-可查看说明，PC端和设备端运行时都需要加上framed参数    
+fibhandler -h  
+可查看说明[`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md)，PC端和设备端运行时都需要加上framed参数    
 注：所有fib容器都要运行其fibhandler.    
 
 

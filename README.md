@@ -3,7 +3,6 @@ OpenR running on H3C device，包括openr和fibservice两部分，openr学习路
 
 [![Build Status](https://www.travis-ci.org/h3copen/h3copenr.svg?branch=master)](https://www.travis-ci.org/h3copen/h3copenr) 
 
-
 ### openr运行  
 可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。  
 1：docker pull lmke/h3c_openr:v2 拿到openr镜像

@@ -13,7 +13,7 @@ docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.
 
 pc端：  
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
-注：不管设备还是PC端，我们都需要至少2个openr，所以要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，我们只需要一台PC。  
+注：不管设备还是PC端，我们都需要至少2个openr。所以在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，我们只需要一台PC。  
 
 3：openr 的网络设置  
 设备端：  
@@ -32,7 +32,7 @@ docker network connect net2 openr2
 docker network connect net3 openr2  
 
 4：openr 运行  
-此时以启动openr容器，之后进去openr容器，在每个openr的根目录下运行    
+此时已启动openr容器，之后进去openr容器（docker attach openr1），在每个openr的根目录下运行  
 run_openr.sh test.cfg > openr.log 2>&1 &   
 注：test.cfg在设备和PC端测试时对应内容不同，镜像中的test.cfg适用于设备环境，PC端测试环境需使用本仓库的test.cfg。设备端和PC端对应的命令相同。   
 

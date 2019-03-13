@@ -32,4 +32,4 @@ notifications:
       - li.mengjie@h3c.com
       - lin.changsheng@h3c.com
     on_success: always # default: change
-    on_failure: never # default: always
+    on_failure: always # default: always

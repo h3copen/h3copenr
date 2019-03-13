@@ -89,7 +89,7 @@ fibservice 运行在另一个容器ubuntu16.04中，用dockerfile生成，接着
 ## openr runnging in our device
 ### run openr
 (For details, please refer to [`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh).)  
-1：you can use the following command to get the openr image, 
+1：you can use the following command to get the openr image,  
 docker pull lmke/h3c_openr:v2 
     
 2: Then start the container by the following command

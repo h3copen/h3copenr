@@ -40,24 +40,24 @@ run_openr.sh test.cfg > openr.log 2>&1 &
 注意：opern运行后需要启动fib容器openr才能正常运行。
 
 5：fib容器运行  
-注：一般我们会说fib，fibhandler,fibservice，在上下文没有特殊说明时，都是指代同一事物。
-1）：创建fib容器  
-本仓库h3cfibservice和comwaresdk目录中包含fib的源码，需要手动编译，生成fib程序。  
-之后需要拉取镜像，我们以ubuntu16.04为例  
-docker pull ubuntu:16.04
-2）：运行
-docker run -it --name fib1 --network container:openr1 ubuntu:16.04 bash
-3）：拷入fib
-chmod +x fibhandler
-docke cp fibhanler fib1:/bin
-4）：为每个openr创建对应fib容器  
-有几个openr容器，就需要几个fib容器，每个openr和fib容器对应，对应关系体现在 第2步运行命令中， --network container:openr_name,这里填写的是对应的openr名称。命令相同，只需修改fib名称和对应的openr容器名称。创建多个fib容器，即重复2 、3步。
+注：一般我们会说fib，fibhandler,fibservice，在上下文没有特殊说明时，都是指代同一事物。  
+1）：创建fib容器    
+本仓库h3cfibservice和comwaresdk目录中包含fib的源码，需要手动编译，生成fib程序。    
+之后需要拉取镜像，我们以ubuntu16.04为例    
+docker pull ubuntu:16.04  
+2）：运行  
+docker run -it --name fib1 --network container:openr1 ubuntu:16.04 bash   
+3）：拷入fib  
+chmod +x fibhandler  
+docke cp fibhanler fib1:/bin  
+4）：为每个openr创建对应fib容器    
+有几个openr容器，就需要几个fib容器，每个openr和fib容器对应，对应关系体现在 第2步运行命令中， --network container:openr_name,这里填写的是对应的openr名称。命令相同，只需修改fib名称和对应的openr容器名称。创建多个fib容器，即重复2 、3步。  
 5）：运行  
-docker attach fib1
-进入每个fib容器，之后运行  
-fibhandler -h  
-可查看说明，PC端和设备端运行时都需要加上framed参数  
-注：所有fib容器都要运行其fibhandler.  
+docker attach fib1  
+进入每个fib容器，之后运行    
+fibhandler -h    
+可查看说明，PC端和设备端运行时都需要加上framed参数    
+注：所有fib容器都要运行其fibhandler.    
 
 
 ### openr相关命令

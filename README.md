@@ -136,12 +136,12 @@ docke cp fibhanler fib1:/bin
 There are several openr containers, you need several fib containers, each openr and fib container correspond, the corresponding relationship is reflected in the second step run command   -- network container:openr_name,Filled in here is the corresponding openr name. The command is the same, just modify the fib name and the corresponding openr container name. Create multiple fib containers, that is, repeat steps 2 and 3.  
 5): Run  
 `docker attach fib1`  
-Enter each FIB container, all FIB containers must run their fibhandler, according to the actual situation need to configure different IP address ,user name and password. Refer to [`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md).PC side：  
+Enter each FIB container, all FIB containers must run their fibhandler, according to the actual situation need to configure different IP address ,user name and password. Refer to [`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md).PC side:    
 `./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -wr`  
-device side：  
+device side:  
 `./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -ec`   
 Both the PC and the device must be loaded with the framed parameter(Framed by default).  
-Note: ac(ip to device), uc(user name to device ), pwc(password to device), ec(enable grpc connect to device), wr(Write route to text, only pc side test used)  
+Note: ac(ip to device), uc(user name to device ), pwc(password to device), ec(enable grpc connect to device), wr(Write route to text, only pc side test used).  
 
 ### command about openr
 After the openr runs, it can interact with it by using the breeze command.Commonly used are breeze fib routes; breeze lm links, etc.

@@ -61,7 +61,6 @@ docker attach fib1
 PC端和设备端运行时都需要加上framed（默认已加framed）参数    
 注：ac（设备ip），uc（设备用户名），pwc（设备密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
 
-
 ### openr相关命令
 openr运行后可使用breeze 命令与其进行交互
 常用的有breeze fib routes； breeze lm links等。
@@ -75,7 +74,7 @@ openr运行后可使用breeze 命令与其进行交互
 openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include中，相关安装过程在上述脚本中会自动执行。 
 
 ## Travis-ci 编译
-在顶层目录中，我们包含了一个yml文件，根据yml，我们会拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  
+在顶层目录中，我们包含了一个yml文件，根据yml，travis-ci会自动拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  
 
 ## run openr
 (For details, please refer to [`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh).)  
@@ -144,4 +143,4 @@ There are two directories in the openr directory, build and openr. The build_ope
 Libraries and header files will be installed into the `/usr/local/lib` and `/usr/local/include`. Installation will be executed automatically in scripts. 
 
 ## Travis-ci Build
-In the top-level directory, include a YML file. In the yml, pull up the image, create the container, download the latest code in the container, and compile openr and fibservice. After the compilation is successful, pull the new image and run openr and fibsrvice. Finally，the test script is run to compare whether the routes sent by openr are the same as those received by fibservice.
+In the top-level directory, include a YML file. According to the yml,travis-ci will pull up the image, create the container, download the latest code in the container, compile openr and compile fibservice automatically. After the compilation is successful, pull the new image and run openr and fibsrvice. Finally，the test script is run to compare whether the routes sent by openr are the same as those received by fibservice.

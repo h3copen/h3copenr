@@ -1,5 +1,5 @@
 # h3copenr
-OpenR running on H3C device，包括openr和fibservice两部分，openr学习路由发送到fibservice，fibservice下发路由到H3C设备。
+OpenR 运行在H3C设备上，包括openr和fibservice两部分，openr学习路由发送到fibservice，fibservice下发路由到H3C设备。
 
 [![Build Status](https://www.travis-ci.org/h3copen/h3copenr.svg?branch=master)](https://www.travis-ci.org/h3copen/h3copenr) 
 
@@ -75,6 +75,10 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 
 ## Travis-ci 编译
 在顶层目录中，我们包含了一个yml文件，根据yml，travis-ci会自动拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  
+
+
+# h3copenr
+OpenR running on H3C device. Including openr and fibservice two parts, openr learning routes and send to fibservice, fibservice send routes to H3C device.
 
 ## run openr
 (For details, please refer to [`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh).)  

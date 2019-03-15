@@ -77,9 +77,7 @@ openr会将所需的库和头文件安装到/usr/local/lib和/usr/local/include�
 ## Travis-ci 编译
 在顶层目录中，我们包含了一个yml文件，根据yml，我们会拉取镜像，创建容器，在容器中下载最新代码，编译openr。此外我们还会编译fibservice，编译成功后，我们会拉取新镜像运行openr和fibservice。之后会运行测试脚本，比较openr发出的路由和fibservice接收的路由是否相同。  
 
-
-## openr runnging in our device
-### run openr
+## run openr
 (For details, please refer to [`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh).)  
 1：you can use the following command to get the openr image,  
 docker pull lmke/h3c_openr:v2 

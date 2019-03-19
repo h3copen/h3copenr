@@ -57,14 +57,15 @@ docker pull lmke/h3c_openr:complie
 docker run -itd --name complie_openr lmke/h3c_openr:complie  bash
 docker exec -it complie_openr sh -c " git clone https://github.com/facebook/openr.git"
 docker cp ./build/build_openr.sh complie_openr:/openr/build/build_openr_fast.sh
-docker exec -it complie_openr sh -c "cd /openr/build && chmod +x build_openr_fast.sh && ./build_openr_fast.sh"
+docker exec -it complie_openr sh -c "cd /openr/build && chmod +x build_openr_fast.sh && \
+					sed -i \"s/sudo//g\" build_openr_fast.sh &&  ./build_openr_fast.sh"
 if [ $? -eq 0 ]; then 
 	docker exec -t complie_openr sh -c "cd /openr && git log | head -1" 
 	docker cp complie_openr:/usr/local/sbin/openr .
 	docker build -f dockerfile_openr -t openr:test .
 else 
 	echo "fast complie openr error"
-	docker exec -it complie_openr sh -c "cd /openr/build && ./build_openr.sh"
+	docker exec -it complie_openr sh -c "cd /openr/build && sed -i \"s/sudo//g\" build_openr.sh && ./build_openr.sh"
 	
 	if [ $? -eq 0 ]; then 
 		docker exec -t complie_openr sh -c "cd /openr && git log | head -1"
@@ -86,6 +87,13 @@ docker network create --subnet 12.13.14.0/24  --gateway=12.13.14.1 Net1
 docker network create --subnet 12.13.15.0/24  --gateway=12.13.15.1 Net2
 docker network create --subnet 12.13.16.0/24  --gateway=12.13.16.1 Net3
 docker network create --subnet 12.13.17.0/24  --gateway=12.13.17.1 Net4
+#设置子网、网关不是必须的 所以你可以写成
+#docker network create Net1
+#设置IP不是必须的 所以可写成 
+#docker network connetc Net1 OPENRTEST10
+#注意 这些都是针对在PC端的测试环境，如果在设备上，可以认为这里的Net*就是设备中的接口，所以在设备上运行时不需要create net,connect net等
+#我们需要的是指定openr的网络模式为container，即readme中所出现的命令
+#所以 我们需要至少俩台设备，分别运行openr
 
 docker network connect Net1 --ip 12.13.14.2 OPENRTEST10
 docker network connect Net2 --ip 12.13.15.2 OPENRTEST10

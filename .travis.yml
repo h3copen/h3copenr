@@ -25,3 +25,11 @@ before_script:
   
 script:
   - ./build/test.sh
+ 
+notifications:
+  email:
+    recipients:
+      - li.mengjie@h3c.com
+      - lin.changsheng@h3c.com
+    on_success: change # default: change
+    on_failure: never # default: always

@@ -55,11 +55,12 @@ docke cp fibhanler fib1:/bin
 5）：运行  
 docker attach fib1  
 进入每个fib容器，所有fib容器都要运行其fibhandler，据实际情况需配置不同ip和用户名、密码，可查看说明[`h3cfibservice/README.md`](https://github.com/h3copen/h3cfibservice/blob/master/README.md)，如pc端需要以下参数：   
-./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -wr    
+./fibhandler -ac 127.0.0.1 -uc 2 -pwc 123456 -wr    
 设备端：   
-./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -ec  
+./fibhandler -ac 127.0.0.1 -uc 2 -pwc 123456 -ec  
 PC端和设备端运行时都需要加上framed（默认已加framed）参数    
 注：ac（设备ip），uc（设备用户名），pwc（设备密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
+其中设备用户名和设备密码是指在comware中手动配置GRPC的用户名和密码。由于fibhandler和openr共享网络,openr和comware共享网络，所以本质fibhandler和comware共享网络，由此我们可以用环回地址，也可用comware上任一地址。也可将fibhandler直接放入openr容器中运行而不需要另起一个容器。
 
 ### openr相关命令
 openr运行后可使用breeze 命令与其进行交互

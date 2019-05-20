@@ -9,7 +9,7 @@ OpenR 运行在H3C设备上，包括openr和fibservice两部分，openr学习路
 
 2：按以下命令启动容器  
 设备端：  
-docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+docker run -it --name openr1 --network container:comware -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 
 pc端：   
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  

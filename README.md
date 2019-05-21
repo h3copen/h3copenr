@@ -12,7 +12,7 @@ OpenR 运行在H3C设备上，包括openr和fibservice两部分，openr学习路
 docker run -it --name openr1 --network container:comware -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 
 pc端：   
-docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+docker run -it --name openr1 -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 注：不管设备还是PC端，都需要至少2个openr。在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，而PC只需要一台。    
 
 3：openr 的网络设置  

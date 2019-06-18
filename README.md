@@ -64,8 +64,8 @@ PC端和设备端运行时都需要加上framed（默认已加framed）参数
 
 ### 配置文件介绍
 在镜像的/etc/sysconfig/openr总存有openr启动的相关配置信息，此路径是run_openr.sh的默认读取配置路径，也可指定配置文件，在根目录下有test.cfg，需要修改参数时可在其中修改。配置文件中主要关注以下两点：
-IFACE_REGEX_INCLUDE :配置openr会从哪些接口发现邻居
-REDISTRIBUTE_IFACES  :配置将哪些接口的数据发布出去，计算路由
+IFACE_REGEX_INCLUDE :配置openr会从哪些接口发现邻居.   
+REDISTRIBUTE_IFACES  :配置将哪些接口的数据发布出去，计算路由.   
 
 
 ### openr相关命令

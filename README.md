@@ -5,14 +5,14 @@ OpenR 运行在H3C设备上，包括openr和fibservice两部分，openr学习路
 
 ## openr运行  
 可参考[`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh)。  
-1：docker pull lmke/h3c_openr:v2 拿到openr镜像
+1：docker pull lmke/h3c_openr:v6 拿到openr镜像
 
 2：按以下命令启动容器  
 设备端：  
-docker run -it --name openr1 --network container:comware -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+docker run -it --name openr1 --network container:comware -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v6 bash  
 
 pc端：   
-docker run -it --name openr1 -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+docker run -it --name openr1 -m 1G --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v6 bash  
 注：不管设备还是PC端，都需要至少2个openr。在PC端，要再创建一个或多个openr，只要容器名不同即可。设备端每个设备只运行一个openr，所以至少需要两台设备，而PC只需要一台。    
 
 3：openr 的网络设置  
@@ -62,6 +62,12 @@ PC端和设备端运行时都需要加上framed（默认已加framed）参数
 注：ac（设备ip），uc（设备用户名），pwc（设备密码），ec（开启grpc连接到设备），wr（写路由到文本，仅pc端测试使用）    
 其中设备用户名和设备密码是指在comware中手动配置GRPC的用户名和密码。由于fibhandler和openr共享网络,openr和comware共享网络，所以本质fibhandler和comware共享网络，由此我们可以用环回地址，也可用comware上任一地址。也可将fibhandler直接放入openr容器中运行而不需要另起一个容器。
 
+### 配置文件介绍
+在镜像的/etc/sysconfig/openr总存有openr启动的相关配置信息，此路径是run_openr.sh的默认读取配置路径，也可指定配置文件，在根目录下有test.cfg，需要修改参数时可在其中修改。配置文件中主要关注以下两点：
+IFACE_REGEX_INCLUDE :配置openr会从哪些接口发现邻居
+REDISTRIBUTE_IFACES  :配置将哪些接口的数据发布出去，计算路由
+
+
 ### openr相关命令
 openr运行后可使用breeze 命令与其进行交互
 常用的有breeze fib routes； breeze lm links等。
@@ -84,11 +90,11 @@ OpenR running on H3C device. Including openr and fibservice two parts, openr lea
 ## run openr
 (For details, please refer to [`h3copenr/build/test.h`](https://github.com/h3copen/h3copenr/blob/master/build/test.sh).)  
 1：you can use the following command to get the openr image,  
-docker pull lmke/h3c_openr:v2 
+docker pull lmke/h3c_openr:v6 
     
 2: Then start the container by the following command
 Device side:  
-docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
+docker run -it --name openr1 --network container:comware --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v6 bash  
 PC side:  
 docker run -it --name openr1 --sysctl net.ipv6.conf.all.disable_ipv6=0 lmke/h3c_openr:v2 bash  
 Note: We need at least 2 openrs regardless of the device or PC. So on the PC side, you need to create one or more openrs, as long as the container name is different. Each device on the device only runs one openr, so at least two devices are required. We only need one PC.  
@@ -135,6 +141,12 @@ device side:
 `./fibhandler -ac 192.168.102.18 -uc 2 -pwc 123456 -ec`   
 Both the PC and the device must be loaded with the framed parameter(Framed by default).  
 Note: ac(ip to device), uc(user name to device ), pwc(password to device), ec(enable grpc connect to device), wr(Write route to text, only pc side test used).  
+
+### Profile introduction  
+The openr startup configuration fie is stored in /etc/sysconfig/openr of the container. This path is run_openr.sh to read  the configuration path by default. You can also specify the configuration file. There is test.cfg in the root directory . You need to modify the startup parameters in this file.   
+In the configuration file, it is mainly the configuration of the interface.  
+IFACE_REGEX_INCLUDE: from which interfaces the configuration will discover neighbors  
+REDISTRIBUTE_IFACES: configure which interface data will be published and calculater the route. For details, please refer to the github porject facebook/openr.
 
 ### command about openr
 After the openr runs, it can interact with it by using the breeze command.Commonly used are breeze fib routes; breeze lm links, etc.
